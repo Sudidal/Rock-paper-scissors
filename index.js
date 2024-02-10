@@ -58,10 +58,12 @@ function PlayRound(playerChosice, computerChoice)
     }
     else
     {
-        console.log("Please Enter A Valid Name");
+        console.log("Please Enter A Valid Choice!");
         SelectChoices();
+        return;
     }
     result = result.concat(", " + playerChosice + " - " + computerChoice);
+
     console.log(result);
     PlayAgain();
 }
