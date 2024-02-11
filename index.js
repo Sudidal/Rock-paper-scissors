@@ -5,39 +5,61 @@ const WIN = "You Win!"
 const LOSE = "You Lose!"
 const TIE = "Tie!"
 
-let rounds;
+const roundsInput = document.querySelector("#roundsinput");
+const startBtn = document.querySelector("#startbtn");
+const rockBtn = document.querySelector("#rockbtn");
+const paperBtn = document.querySelector("#paperbtn");
+const scissorsBtn = document.querySelector("#scissorsbtn");
+const resultTxt = document.querySelector("#result")
+const compScoreTxt = document.querySelector("#compscore")
+const playerScoreTxt = document.querySelector("#playerscore")
 
-StartGame();
+let rounds = 0;
+let compScore = 0;
+let playerScore = 0;
+
+roundsInput.value = 1;
+changeButtonsState();
+
+startBtn.addEventListener("click", StartGame);
+roundsInput.addEventListener("keypress", (Event) => 
+{
+    if(Event.key == "Enter")
+    {
+        Event.preventDefault();
+        startBtn.click();
+    }
+});
+rockBtn.addEventListener("click", () => 
+{
+    SelectChoices(ROCK);
+});
+paperBtn.addEventListener("click", () => 
+{
+    SelectChoices(PAPER);
+});
+scissorsBtn.addEventListener("click", () => 
+{
+    SelectChoices(SCISSORS);
+});
 
 function StartGame()
 {
-    rounds = prompt("How many rounds you want to play?", 1);
+    rounds = roundsInput.value;
     console.log("Rounds: " + rounds);
-    SelectChoices();
+    playerScore = 0;
+    compScore = 0;
+    setTxtValue();
+    changeButtonsState();
 }
 
-function SelectChoices()
+function SelectChoices(_plchoice)
 {
-    let computerChoise = randomComputerChoice();
-    let playerChosice = prompt("Rock, Paper or Scissors", "");
-    playerChosice = playerChosice.toLowerCase();
-    PlayRound(playerChosice, computerChoise);
-}
-
-function randomComputerChoice()
-{
-    let random = Math.floor(Math.random() * 3);
-    if(random == 0)
+    if(rounds != 0)
     {
-        return ROCK;
-    }
-    else if(random == 1)
-    {
-        return PAPER;
-    }
-    else
-    {
-        return SCISSORS
+        let computerChoice = randomComputerChoice();
+        let playerChosice = _plchoice;
+        PlayRound(playerChosice, computerChoice);
     }
 }
 
@@ -62,36 +84,62 @@ function PlayRound(playerChosice, computerChoice)
         SelectChoices();
         return;
     }
+    if(result == WIN)
+    {
+        playerScore++;
+    }
+    else if(result == LOSE)
+    {
+        compScore++;
+    }
     result = result.concat(", " + playerChosice + " - " + computerChoice);
-
-    console.log(result);
-    PlayAgain();
+    rounds--;
+    changeButtonsState();
+    setTxtValue(result);
 }
 
-function PlayAgain()
+function setTxtValue(result = "")
 {
-    rounds--;
-    if(rounds > 0)
+    resultTxt.innerText = result;
+    playerScoreTxt.innerText = "Player Score: " + playerScore;
+    compScoreTxt.innerText = "Computer Score: " + compScore;
+    
+}
+
+function randomComputerChoice()
+{
+    let random = Math.floor(Math.random() * 3);
+    if(random == 0)
     {
-        SelectChoices();
+        return ROCK;
+    }
+    else if(random == 1)
+    {
+        return PAPER;
     }
     else
     {
-        let choise = prompt("Do you want to play again? y/n")
-        if(choise == 'y')
-        {
-            StartGame();
-        }
-        else if(choise == 'n')
-        {
-            console.log("as you want!");
-        }
-        else
-        {
-            PlayAgain();
-        }
+        return SCISSORS
     }
 }
+
+function changeButtonsState()
+{
+    if(rounds == 0)
+    {
+        rockBtn.disabled = true;
+        paperBtn.disabled = true;
+        scissorsBtn.disabled = true;
+    }
+    else
+    {
+        rockBtn.disabled = false;
+        paperBtn.disabled = false;
+        scissorsBtn.disabled = false;
+    }
+}
+
+
 
 function paperCase(computerChoise)
 {
