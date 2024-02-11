@@ -1,0 +1,48 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    background-color:rgb(220, 88, 17);
+}
+body
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+    gap: 20px;
+}
+label
+{
+    font-weight: bold;
+    font-size: 25px;
+}
+#roundsinput
+{
+    width: 100px;
+    background-color: rgb(221, 221, 221);
+    border: 1px solid black;
+}
+#startbtn
+{
+    margin-left: 10px;
+    width: 50px;
+    border: 1px solid black;
+    border-radius: 15%;
+    background-color: yellow;
+}
+.wepean
+{
+    width: 80px;
+    height: 30px;
+    border: 2px solid rgb(12, 12, 12);
+    background-color: rgb(185, 185, 185);
+    font-weight: bold;
+}
+.score
+{
+    font-weight: bold;
+    margin-bottom: 5px;
+}

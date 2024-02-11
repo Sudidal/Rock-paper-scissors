@@ -6,22 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><Rock-Paper-Scissors></Rock-Paper-Scissors></title>
     <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div>
         <label for="roundsinput">How Many Rounds You Wanna Play?</label>
+    </div>
+    <div>
         <input type="text" id="roundsinput"  placeholder="Enter rounds number">
         <button id="startbtn">Start</button>
     </div>
     <div id="buttonsdiv">
-        <button id="rockbtn">Rock</button>
-        <button id="paperbtn">Paper</button>
-        <button id="scissorsbtn">Scissors</button>
+        <button id="rockbtn" class="wepean">Rock</button>
+        <button id="paperbtn" class="wepean">Paper</button>
+        <button id="scissorsbtn" class="wepean">Scissors</button>
     </div>
     <div id="result"></div>
     <div>
-        <div id="playerscore"></div>
-        <div id="compscore"></div>
+        <div id="playerscore" class="score"></div>
+        <div id="compscore" class="score"></div>
     </div>
 </body>
 </html>
